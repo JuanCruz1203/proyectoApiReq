@@ -1,0 +1,36 @@
+<body>
+  <div class="hero-image">
+    <div class="search-container">
+      <div class="input-group">
+        <div class="form-outline" data-mdb-input-init>
+          <input type="search" id="form1" class="form-control" [(ngModel)]="name" placeholder="Busca el pais"  pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s]+" />
+          <label class="form-label" for="form1"></label>
+        </div>
+        <button type="button" class="btn btn-primary up" (click)="onSearch()" data-mdb-ripple-init>
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="countryData" *ngIf="country.length > 0 && countryFound">
+      <h2>{{ country[0].name.common }}</h2>
+      <img [src]="country[0].flags.png" alt="Bandera de {{ country[0].name.common }}" width="200" />
+      <p>Capital: {{ country[0].capital[0] }}</p>
+      <p>Región: {{ country[0].region }}</p>
+      <p>Población: {{ country[0].population }}</p>
+
+      <h3>Idiomas hablados:</h3>
+      <ul>
+        <li *ngFor="let language of getLanguages(country[0].languages)">
+          {{ language }}
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</body>
